@@ -218,7 +218,10 @@ class JacksonParser(
             case "Infinity" => Double.PositiveInfinity
             case "-Infinity" => Double.NegativeInfinity
             case other =>
-              throw new RuntimeException(s"Cannot parse $other as ${DoubleType.catalogString}.")
+              throw new RuntimeException(
+                s"Cannot parse fieldName: [${parser.currentName()}], fieldValue: [${other}], " +
+                  s"[${VALUE_STRING}] as target [${DoubleType.catalogString}]."
+              )
           }
       }
 
@@ -372,7 +375,8 @@ class JacksonParser(
       // We cannot parse this token based on the given data type. So, we throw a
       // RuntimeException and this exception will be caught by `parse` method.
       throw new RuntimeException(
-        s"Failed to parse a value for data type ${dataType.catalogString} (current token: $token).")
+        s"Failed to parse fieldName: [${parser.currentName()}], fieldValue: [${parser.getText}], " +
+          s"[${token.toString}] to target dataType [${dataType.catalogString}].")
   }
 
   /**

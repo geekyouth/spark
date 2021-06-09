@@ -11,8 +11,14 @@ import org.apache.spark.sql.test.SharedSparkSession
  *
  * from_json 测试类运行准备：
  * 1. git checkout v3.1.2
+ *  mvn clean install -U
+ *  https://stackoverflow.com/a/26819686/9633499
+ *  
  * 2. 在项目路径下打开 git cmd，执行命令： ./build/spark-build-info ./core/target/extra-resources 3.1.2
  * https://stackoverflow.com/a/44416809/9633499
+ * Intellij IDEA 编译spark源码报错解决方法 | Joey's Notes
+http://joey771.cn/2017/07/05/spark/spark%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/Intellij%20IDEA%20%E7%BC%96%E8%AF%91spark%E6%BA%90%E7%A0%81%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/
+
  * 3. maven --> spark-catalyst --> 右键 generate sources and update folders
  * https://stackoverflow.com/a/63202594/9633499
  *

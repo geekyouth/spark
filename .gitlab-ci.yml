@@ -1,0 +1,37 @@
+# use our self-build alpine base image installed with docker binary files, mvn, jdk8, kubectl and sonar-scanner binary
+image: gitlab.wisers.com:2443/rnd-backend/lib/docker-maven-jdk8
+# need to add this service if we want to use "docker info", "docker build" or "docker push"
+services:
+  - docker:18.09-dind
+variables:
+  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_DRIVER: overlay2
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+
+before_script:
+  - mkdir ~/.m2
+  - echo $M2_SETTINGS > ~/.m2/settings.xml
+
+stages:
+  - spark-catalyst_2.11
+  - spark-sql_2.11
+
+spark-catalyst_2.11:
+  stage: spark-catalyst_2.11
+#  when: manual
+  tags:
+    - backend
+  variables: 
+    POM: sql/catalyst/pom.xml
+  script:
+    - APP_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout -f ${POM})
+    - groupId=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.groupId -q -DforceStdout -f ${POM})
+    - artifactId=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout -f ${POM})
+    
+    - mvn clean deploy -e -Dmaven.test.skip=true -f ${POM} -T 20
+  only:
+    - 2.4.3.1-kl

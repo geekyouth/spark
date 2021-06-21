@@ -22,16 +22,22 @@ stages:
 
 spark-catalyst_2.11:
   stage: spark-catalyst_2.11
-#  when: manual
   tags:
     - backend
-  variables: 
+  variables:
     POM: sql/catalyst/pom.xml
   script:
-    - APP_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout -f ${POM})
-    - groupId=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.groupId -q -DforceStdout -f ${POM})
-    - artifactId=$(mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.artifactId -q -DforceStdout -f ${POM})
-    
+    - mvn clean deploy -e -Dmaven.test.skip=true -f ${POM} -T 20
+  only:
+    - 2.4.3.1-kl
+
+spark-sql_2.11:
+  stage: spark-sql_2.11
+  tags:
+    - backend
+  variables:
+    POM: sql/core/pom.xml
+  script:
     - mvn clean deploy -e -Dmaven.test.skip=true -f ${POM} -T 20
   only:
     - 2.4.3.1-kl

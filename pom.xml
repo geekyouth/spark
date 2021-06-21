@@ -2893,7 +2893,7 @@
     </profile>
   </profiles>
 
-  <distributionManagement>
+  <!--<distributionManagement>
     <repository>
       <id>aws-nexus</id>
       <url>https://nexus.wisers.com.cn/repository/devops-maven-releases/</url>
@@ -2902,6 +2902,16 @@
       <id>aws-nexus</id>
       <url>https://nexus.wisers.com.cn/repository/devops-maven-snapshots/</url>
     </snapshotRepository>
-  </distributionManagement>
+  </distributionManagement>-->
   
+    <distributionManagement>
+        <repository>
+            <id>wisers-nexus</id>
+            <url>https://gitlab.wisers.com:28080/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>wisers-nexus</id>
+            <url>https://gitlab.wisers.com:28080/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

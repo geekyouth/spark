@@ -22,6 +22,7 @@ stages:
 
 spark-catalyst_2.11:
   stage: spark-catalyst_2.11
+  when: manual
   tags:
     - backend
   variables:
@@ -33,6 +34,7 @@ spark-catalyst_2.11:
 
 spark-sql_2.11:
   stage: spark-sql_2.11
+  when: manual
   tags:
     - backend
   variables:

@@ -6,7 +6,7 @@ services:
 variables:
   DOCKER_HOST: tcp://localhost:2375
   DOCKER_DRIVER: overlay2
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Xms2048m -Xmx5120m"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Xms2048m -Xmx2048m"
 
 cache:
   paths:

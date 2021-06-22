@@ -6,7 +6,7 @@ services:
 variables:
   DOCKER_HOST: tcp://localhost:2375
   DOCKER_DRIVER: overlay2
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Xms2048m -Xmx10240m -X"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository -Xms2048m -Xmx10240m"
 
 cache:
   paths:
@@ -27,7 +27,7 @@ spark-catalyst_2.11:
   variables:
     POM: sql/catalyst/pom.xml
   script:
-    - mvn clean deploy -e -DskipTests -f ${POM} -T 30
+    - mvn clean deploy -e -DskipTests -f ${POM} -T 30 -X
   only:
     - 2.4.3.1-kl
 
@@ -38,6 +38,6 @@ spark-sql_2.11:
   variables:
     POM: sql/core/pom.xml
   script:
-    - mvn clean deploy -e -DskipTests -f ${POM} -T 30
+    - mvn clean deploy -e -DskipTests -f ${POM} -T 30 -X
   only:
     - 2.4.3.1-kl

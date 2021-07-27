@@ -27,8 +27,7 @@
   </parent>
 
   <artifactId>spark-catalyst_2.11</artifactId>
-  <version>${spark.fix.version}</version>
-  
+
   <packaging>jar</packaging>
   <name>Spark Project Catalyst</name>
   <url>http://spark.apache.org/</url>
@@ -49,31 +48,18 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
+      <version>${project.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-tags_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
     </dependency>
 
     <!--
@@ -83,7 +69,6 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-tags_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
@@ -91,24 +76,12 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-unsafe_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-sketch_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.scalacheck</groupId>
@@ -150,11 +123,23 @@
         <artifactId>maven-jar-plugin</artifactId>
         <executions>
           <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>wisers</classifier>
+            </configuration>
+          </execution>
+          <execution>
             <id>prepare-test-jar</id>
             <phase>test-compile</phase>
             <goals>
               <goal>test-jar</goal>
             </goals>
+            <configuration>
+              <classifier>wisers</classifier>
+            </configuration>
           </execution>
         </executions>
       </plugin>

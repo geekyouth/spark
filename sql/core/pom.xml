@@ -27,8 +27,6 @@
   </parent>
 
   <artifactId>spark-sql_2.11</artifactId>
-  <version>${spark.fix.version}</version>
-  
   <packaging>jar</packaging>
   <name>Spark Project SQL</name>
   <url>http://spark.apache.org/</url>
@@ -40,7 +38,7 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-avro_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
+      <version>${project.version}</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -65,7 +63,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-    
+
     <dependency>
       <groupId>com.univocity</groupId>
       <artifactId>univocity-parsers</artifactId>
@@ -75,66 +73,37 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-sketch_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
+      <version>${project.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-catalyst_${scala.binary.version}</artifactId>
-      <version>${spark.fix.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
+      <version>${project.version}</version>
+      <classifier>wisers</classifier>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-catalyst_${scala.binary.version}</artifactId>
-      <version>${spark.fix.version}</version>
+      <version>${project.version}</version>
+      <classifier>wisers</classifier>
       <type>test-jar</type>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>spark-tags_2.11</artifactId>
-          <groupId>org.apache.spark</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-tags_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
     </dependency>
 
     <!--
@@ -144,7 +113,6 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-tags_${scala.binary.version}</artifactId>
-      <version>${spark.base.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
@@ -233,11 +201,23 @@
         <artifactId>maven-jar-plugin</artifactId>
         <executions>
           <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>wisers</classifier>
+            </configuration>
+          </execution>
+          <execution>
             <id>prepare-test-jar</id>
             <phase>test-compile</phase>
             <goals>
               <goal>test-jar</goal>
             </goals>
+            <configuration>
+              <classifier>wisers</classifier>
+            </configuration>
           </execution>
         </executions>
       </plugin>

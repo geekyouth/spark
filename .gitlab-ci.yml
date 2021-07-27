@@ -28,7 +28,7 @@ spark-catalyst_2.11:
   variables:
     POM: sql/catalyst/pom.xml
   script:
-    - mvn clean deploy -e -DskipTests -f ${POM} -T 30
+    - mvn clean install -e -DskipTests -f sql/catalyst/pom.xml -T 30
   only:
     - 2.4.3.1-kl
 
